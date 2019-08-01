@@ -1,22 +1,33 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Psychic Game</title>
-     
-</head>
-<body>
-    <div>
-        <h1 id="directions-text">You have 9 tries to guess which letter the computer is thinking of! Are you a certified cyber-psychic?</h1>
-        <p id="userchoice-text"></p>
-        <p id="computerchoice-text"></p>
-        <p id="guessesLeft"></p>
-        <p id="guesses-text"></p>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
-        <p id="wins-text"></p>
-        <p id="losses-text"></p>
-      </div>
-      <script type="text/javascript" src="assets/javascript/game.js"></script>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid bg-white m-5">
+        <div class="container">
+            <h1 class="display-4">Test Your Psychic Abilities</h1>
+            <p class="lead">You have 9 tries to guess which letter the computer is thinking of! Are you a certified
+                cyber-psychic?</p>
+        </div>
+    </div>
+    <div class="bg-white container p-3">
+
+        <p id="guessesLeft"></p>
+        <p id="guesses-text">Guesses So Far: </p>
+        <p id="wins-text"> Wins: 0</p>
+        <p id="losses-text">Losses: 0</p>
+
+    </div>
+    <script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
+
 </html>
