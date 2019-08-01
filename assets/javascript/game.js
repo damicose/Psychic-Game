@@ -34,8 +34,8 @@ updateAnswer();
 updateGuessesLeft();
 
 document.onkeyup = function(event) {
-    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-    var check = computerChoices.includes(userGuess);
+    const userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    const check = computerChoices.includes(userGuess);
 
     if (check === false) {
         alert("Please enter a valid character");
