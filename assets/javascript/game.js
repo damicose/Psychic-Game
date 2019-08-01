@@ -1,49 +1,69 @@
-const computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+let computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
 let wins = 0;
 let losses = 0;
 let guesses = 9;
+let guessesLeft = 9;
+let guessed = []
+let answer = null
 
-const directionsText = document.getElementById("directions-text");
-const userChoiceText = document.getElementById("userchoice-text");
-const computerChoiceText = document.getElementById("computerchoice-text");
-const guessesText = document.getElementById("guesses-text");
-const winsText = document.getElementById("wins-text");
-const lossesText = document.getElementById("losses-text");
+let computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-const computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+function updateAnswer() {
+    answer = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+};
 
+function updateGuessesLeft() {
+    document.querySelector('#guessesLeft').innerHTML = "Guesses left: " + guessesLeft;
+};
 
-function allowGuess() {
-    if (guesses < 0) {
-        document.querySelector("guesses-text").innerHTML = "Game Over!";
-        losses++;
-        computerChoiceText.textContent = "The computer chose: " + computerGuess;
-    }
+function updateGuessed() {
+    document.querySelector('#guesses-text').innerHTML = "Guesses So Far: " + guessed.join(', ')
 }
 
-allowGuess();
+const reset = function () {
+    guesses = 9;
+    guessesLeft = 9;
+    guessed = [];
+    updateAnswer();
+    updateGuessed();
+    updateGuessesLeft();
+}
+
+updateAnswer();
+updateGuessesLeft();
 console.log(computerGuess)
 
-document.onkeyup = function (event) {
+document.onkeyup = function(event) {
+    var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    var check = computerChoices.includes(userGuess);
 
-    if (guesses < 0) {
-        return;
-    }
+    if (check === false) {
+        alert("Please enter a valid character");
+        return false;
+    } else if (check === true) {
+        guessesLeft--;
+        guessed.push(userGuess);
+        updateGuessesLeft();
+        updateGuessed();
 
-    const userGuess = event.key.toLowerCase();
+        if (guessesLeft > 0) {
+            if (userGuess == answer) {
+                wins++;
+                document.querySelector('#wins-text').innerHTML = "Wins: " + wins;
+                alert("You win! The answer was " + answer);
+                reset();
+            }
+        } else if (guessesLeft == 0) {
+            losses++;
+            document.querySelector('#losses-text').innerHTML = "Losses: " + losses;
+            alert("You lose! The answer was " + answer);
+            reset();
 
-    if ((userGuess === computerGuess)) {
-        wins++;
+        }
+        return false;
     } else {
-        guesses--;
-        document.querySelector("#guesses-text").innerHTML = "You Guessed: " + userGuess;
+        alert("Critical Failure");
     }
 
-    directionsText.textContent = "";
-
-
-    userChoiceText.textContent = "You Chose: " + userGuess;
-    guessesText.textContent = "Guesses Remaining: " + guesses
-    winsText.textContent = "Wins: " + wins;
-    lossesText.textContent = "Losses: " + losses;
 };
