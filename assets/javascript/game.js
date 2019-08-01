@@ -32,7 +32,6 @@ const reset = function () {
 
 updateAnswer();
 updateGuessesLeft();
-console.log(computerGuess)
 
 document.onkeyup = function(event) {
     var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
